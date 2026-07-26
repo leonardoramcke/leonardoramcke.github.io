@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramcke — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b1220;
+    --bg-raised: #101a2c;
+    --line: #223049;
+    --text: #e6edf3;
+    --muted: #8797ac;
+    --green: #4ade80;
+    --green-dim: #2f7a52;
+    --amber: #f5a623;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+
+  /* subtle grid backdrop */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity:0.15;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:900px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  /* HEADER */
+  header{padding:64px 0 28px;}
+  .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--green); border:1px solid var(--green-dim);
+    padding:5px 10px; border-radius:4px;
+  }
+  .tag::before{content:"●"; font-size:8px;}
+  h1{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:800;
+    font-size:clamp(32px, 6vw, 52px);
+    margin-top:18px;
+    letter-spacing:-0.01em;
+  }
+  h1 .prompt{color:var(--muted); font-weight:400;}
+  .sub{
+    color:var(--muted);
+    font-size:16px;
+    margin-top:10px;
+    max-width:520px;
+  }
+  .gh-link{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:22px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    text-decoration:none;
+    border-bottom:1px solid var(--green-dim);
+    padding-bottom:2px;
+    color:var(--green);
+    transition:opacity .15s;
+  }
+  .gh-link:hover{opacity:0.75;}
+
+  /* TERMINAL */
+  .terminal{
+    margin:36px 0 8px;
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:7px;
+    padding:11px 14px;
+    background:#0e1626;
+    border-bottom:1px solid var(--line);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#ff5f57;}
+  .dot.y{background:#febc2e;}
+  .dot.g{background:#28c840;}
+  .terminal-title{
+    margin-left:auto; margin-right:auto;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--muted);
+    transform:translateX(-14px);
+  }
+  .terminal-body{
+    padding:22px 20px 26px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+  }
+  .term-line{margin-bottom:6px; color:var(--muted);}
+  .term-line .p{color:var(--green);}
+  .term-line .path{color:#6aa9ff;}
+  .term-out{color:var(--text); margin:0 0 14px 0; white-space:pre-wrap;}
+  .term-out .dir{color:var(--amber);}
+  .cursor{
+    display:inline-block; width:8px; height:15px;
+    background:var(--green); vertical-align:middle;
+    animation:blink 1s steps(1) infinite;
+    margin-left:2px;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  /* PROJECTS */
+  section.projects{padding:52px 0 20px;}
+  .section-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:22px;
+  }
+  .card{
+    display:block;
+    text-decoration:none;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--bg-raised);
+    padding:24px 24px 22px;
+    margin-bottom:16px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .card:hover{
+    border-color:var(--green-dim);
+    transform:translateX(4px);
+  }
+  .card-top{
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    flex-wrap:wrap;
+  }
+  .card-name{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:19px;
+    color:var(--text);
+  }
+  .card-name .owner{color:var(--muted); font-weight:400;}
+  .arrow{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--green);
+    font-size:14px;
+    white-space:nowrap;
+  }
+  .card-desc{
+    color:var(--muted);
+    font-size:14.5px;
+    margin-top:10px;
+    max-width:620px;
+  }
+  .badges{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;}
+  .badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:3px 8px;
+    border-radius:4px;
+  }
+
+  /* FOOTER */
+  footer{
+    padding:60px 0 50px;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+    color:var(--muted);
+    font-size:13.5px;
+    font-family:'JetBrains Mono', monospace;
+  }
+  footer a{color:var(--green); text-decoration:none; border-bottom:1px solid var(--green-dim);}
+
+  @media (max-width:560px){
+    header{padding:44px 0 20px;}
+    .terminal-body{font-size:12.5px;}
+    .card{padding:18px 18px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <span class="tag">disponível para novos projetos</span>
+    <h1><span class="prompt">~/</span>ramcke</h1>
+    <p class="sub">Desenvolvedor. Construo ferramentas, protótipos e produtos — do offline-first ao SaaS fictício. Abaixo, o que está rodando no repositório agora.</p>
+    <a class="gh-link" href="https://github.com/leonardoramcke" target="_blank" rel="noopener">
+      <span>→</span> github.com/leonardoramcke
+    </a>
+  </header>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="terminal-title">ramcke — zsh</span>
+    </div>
+    <div class="terminal-body">
+      <p class="term-line"><span class="p">leo@dev</span>:<span class="path">~</span>$ ls ./projetos</p>
+      <p class="term-out"><span class="dir">bitcoin-recovery/</span>  <span class="dir">devcanvas/</span>  <span class="dir">payflow/</span></p>
+      <p class="term-line"><span class="p">leo@dev</span>:<span class="path">~</span>$ cat status.txt<span class="cursor"></span></p>
+    </div>
+  </div>
+
+  <section class="projects" id="projetos">
+    <p class="section-label">// projetos</p>
+
+    <a class="card" href="https://github.com/leonardoramcke/bitcoin-recovery" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="card-name"><span class="owner">leonardoramcke/</span>bitcoin-recovery</span>
+        <span class="arrow">ver repositório →</span>
+      </div>
+      <p class="card-desc">Ferramenta com interface gráfica para recuperar carteiras Bitcoin a partir de seed phrases BIP39 incompletas. Roda 100% offline.</p>
+      <div class="badges">
+        <span class="badge">GUI</span>
+        <span class="badge">Segurança</span>
+        <span class="badge">Offline-first</span>
+        <span class="badge">BIP39</span>
+      </div>
+    </a>
+
+    <a class="card" href="https://github.com/leonardoramcke/DevCanvas" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="card-name"><span class="owner">leonardoramcke/</span>DevCanvas</span>
+        <span class="arrow">ver repositório →</span>
+      </div>
+      <p class="card-desc">Gerador moderno de CSS com preview em tempo real. Crie efeitos de glassmorphism, sombras e gradientes com facilidade, sem sair do navegador.</p>
+      <div class="badges">
+        <span class="badge">CSS</span>
+        <span class="badge">Dev tool</span>
+        <span class="badge">Preview em tempo real</span>
+      </div>
+    </a>
+
+    <a class="card" href="https://github.com/leonardoramcke/payflow" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="card-name"><span class="owner">leonardoramcke/</span>payflow</span>
+        <span class="arrow">ver repositório →</span>
+      </div>
+      <p class="card-desc">SaaS fictício de gerenciamento de pagamentos, construído como projeto de portfólio para demonstrar arquitetura de produto ponta a ponta.</p>
+      <div class="badges">
+        <span class="badge">SaaS</span>
+        <span class="badge">Fintech</span>
+        <span class="badge">Portfólio</span>
+      </div>
+    </a>
+  </section>
+
+  <footer>
+    <p>Feito por Leo Ramcke · <a href="https://github.com/leonardoramcke" target="_blank" rel="noopener">github.com/leonardoramcke</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>
