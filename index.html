@@ -5,19 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leo Ramcke — Portfólio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #f7f8fb;
+    --bg: #f6f7fb;
+    --bg-soft: #eef0f7;
     --card: #ffffff;
-    --ink: #10182b;
-    --muted: #5b6478;
-    --line: #e7e9f0;
+    --ink: #0e1524;
+    --muted: #5c6478;
+    --line: #e6e8f0;
     --primary: #2451e0;
-    --primary-dim: #eef2ff;
+    --primary-ink: #ffffff;
+    --primary-dim: #eaf0ff;
     --amber: #b8730c;
     --amber-bg: #fdf3e3;
+    --shadow: 0 1px 2px rgba(16,24,43,0.04), 0 8px 24px -12px rgba(16,24,43,0.10);
+    --shadow-hover: 0 4px 10px rgba(16,24,43,0.06), 0 20px 40px -16px rgba(16,24,43,0.18);
+    color-scheme: light;
   }
+  html[data-theme="dark"]{
+    --bg: #0b0f1a;
+    --bg-soft: #10152355;
+    --card: #131a2b;
+    --ink: #eef1fa;
+    --muted: #8b93a8;
+    --line: #232b40;
+    --primary: #6d94ff;
+    --primary-ink: #0b0f1a;
+    --primary-dim: #182448;
+    --amber: #f0b054;
+    --amber-bg: #2a2013;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    --shadow-hover: 0 4px 10px rgba(0,0,0,0.35), 0 24px 48px -16px rgba(0,0,0,0.55);
+    color-scheme: dark;
+  }
+
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
@@ -26,26 +48,41 @@
     font-family:'Inter', sans-serif;
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
+    transition:background-color .25s ease, color .25s ease;
   }
-  .mono{font-family:'JetBrains Mono', monospace;}
   a{color:inherit;}
   .wrap{max-width:960px; margin:0 auto; padding:0 24px;}
 
   /* NAV */
   nav{
+    position:sticky; top:0; z-index:20;
     display:flex; align-items:center; justify-content:space-between;
-    padding:22px 24px; max-width:960px; margin:0 auto;
+    padding:18px 24px;
+    max-width:960px; margin:0 auto;
+    backdrop-filter:blur(10px);
+    background:color-mix(in srgb, var(--bg) 78%, transparent);
   }
   .brand{font-weight:800; font-size:17px; letter-spacing:-0.01em;}
-  .nav-links{display:flex; gap:28px; font-size:14px; font-weight:500; color:var(--muted);}
-  .nav-links a{text-decoration:none;}
+  .nav-right{display:flex; align-items:center; gap:26px;}
+  .nav-links{display:flex; gap:26px; font-size:14px; font-weight:500; color:var(--muted);}
+  .nav-links a{text-decoration:none; transition:color .15s ease;}
   .nav-links a:hover{color:var(--ink);}
 
-  /* HERO */
-  header.hero{
-    padding:56px 0 40px;
-    text-align:left;
+  .theme-toggle{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:10px;
+    background:var(--card); border:1px solid var(--line);
+    cursor:pointer;
+    transition:border-color .15s ease, transform .15s ease;
   }
+  .theme-toggle:hover{border-color:var(--primary); transform:translateY(-1px);}
+  .theme-toggle svg{width:18px; height:18px; stroke:var(--ink);}
+  .theme-toggle .sun{display:none;}
+  html[data-theme="dark"] .theme-toggle .sun{display:block;}
+  html[data-theme="dark"] .theme-toggle .moon{display:none;}
+
+  /* HERO */
+  header.hero{padding:64px 0 44px;}
   .eyebrow{
     display:inline-flex; align-items:center; gap:7px;
     font-size:13px; font-weight:600; color:var(--primary);
@@ -54,47 +91,45 @@
   }
   .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--primary);}
   h1{
-    font-size:clamp(34px, 5.2vw, 50px);
+    font-size:clamp(34px, 5.2vw, 52px);
     font-weight:800;
     letter-spacing:-0.02em;
-    margin-top:20px;
-    max-width:640px;
+    margin-top:22px;
+    max-width:660px;
   }
   .lede{
     color:var(--muted);
     font-size:18px;
-    margin-top:14px;
+    margin-top:16px;
     max-width:560px;
   }
-  .hero-ctas{margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;}
+  .hero-ctas{margin-top:30px; display:flex; gap:12px; flex-wrap:wrap;}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     font-weight:600; font-size:14.5px;
-    padding:11px 20px; border-radius:9px;
+    padding:12px 22px; border-radius:10px;
     text-decoration:none;
-    transition:transform .15s ease, box-shadow .15s ease;
+    transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
   }
-  .btn-primary{background:var(--ink); color:#fff;}
-  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 20px -6px rgba(16,24,43,0.4);}
-  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line);}
-  .btn-ghost:hover{border-color:#c7cce0;}
+  .btn-primary{background:var(--primary); color:var(--primary-ink);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:var(--shadow-hover);}
+  .btn-ghost{background:var(--card); color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--primary); transform:translateY(-2px);}
 
   /* SECTION HEADERS */
-  .section{padding:44px 0;}
-  .section-head{margin-bottom:26px;}
+  .section{padding:48px 0;}
+  .section-head{margin-bottom:28px;}
   .section-kicker{
     font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
     color:var(--muted);
   }
   .section-title{
-    font-size:24px; font-weight:800; letter-spacing:-0.01em; margin-top:6px;
+    font-size:25px; font-weight:800; letter-spacing:-0.01em; margin-top:6px;
   }
   .section-desc{color:var(--muted); font-size:15px; margin-top:8px; max-width:600px;}
 
   /* PRODUCTION GRID (teaser) */
-  .prod-grid{
-    display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
-  }
+  .prod-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;}
   .prod-card{
     background:var(--card);
     border:1px solid var(--line);
@@ -102,12 +137,15 @@
     padding:22px;
     position:relative;
     overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   }
+  .prod-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-hover); border-color:color-mix(in srgb, var(--primary) 35%, var(--line));}
   .prod-card::before{
     content:"";
     position:absolute; top:0; left:0; right:0; height:3px;
-    background:linear-gradient(90deg, var(--primary), #8bb0ff);
-    opacity:0.6;
+    background:linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 40%, transparent));
+    opacity:0.7;
   }
   .status-chip{
     display:inline-flex; align-items:center; gap:6px;
@@ -129,9 +167,10 @@
     border:1px solid var(--line);
     border-radius:12px;
     padding:20px 22px;
-    transition:border-color .15s ease, transform .15s ease;
+    box-shadow:var(--shadow);
+    transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
   }
-  .tech-card:hover{border-color:#c7cce0; transform:translateX(3px);}
+  .tech-card:hover{border-color:color-mix(in srgb, var(--primary) 35%, var(--line)); transform:translateX(4px); box-shadow:var(--shadow-hover);}
   .tech-icon{
     flex-shrink:0;
     width:42px; height:42px; border-radius:10px;
@@ -147,27 +186,25 @@
   .tech-tags{margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;}
   .tag{
     font-size:11px; font-weight:600; color:var(--muted);
-    background:#f1f2f7; padding:3px 9px; border-radius:6px;
+    background:var(--bg-soft); padding:3px 9px; border-radius:6px;
   }
 
   /* FOOTER */
   footer{
-    padding:48px 0 60px;
+    padding:50px 0 60px;
     border-top:1px solid var(--line);
-    margin-top:20px;
+    margin-top:24px;
     display:flex; align-items:center; justify-content:space-between;
     flex-wrap:wrap; gap:14px;
   }
   .footer-text{color:var(--muted); font-size:14px;}
-  .footer-link{
-    font-weight:600; font-size:14px; color:var(--primary); text-decoration:none;
-  }
+  .footer-link{font-weight:600; font-size:14px; color:var(--primary); text-decoration:none;}
 
   @media (max-width:640px){
     .prod-grid{grid-template-columns:1fr;}
-    nav{padding:18px 20px;}
-    .nav-links{gap:16px; font-size:13px;}
-    header.hero{padding:36px 0 28px;}
+    nav{padding:16px 20px;}
+    .nav-links{display:none;}
+    header.hero{padding:40px 0 30px;}
     .tech-card{flex-direction:column;}
   }
 </style>
@@ -176,10 +213,16 @@
 
 <nav>
   <span class="brand">Leo Ramcke</span>
-  <div class="nav-links">
-    <a href="#producao">Em produção</a>
-    <a href="#tecnicos">Projetos técnicos</a>
-    <a href="https://github.com/leonardoramcke" target="_blank" rel="noopener">GitHub</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#producao">Em produção</a>
+      <a href="#tecnicos">Projetos técnicos</a>
+      <a href="https://github.com/leonardoramcke" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -293,6 +336,24 @@
   </footer>
 
 </div>
+
+<script>
+  (function(){
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = saved || (prefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    toggle.addEventListener('click', function(){
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  })();
+</script>
 
 </body>
 </html>
