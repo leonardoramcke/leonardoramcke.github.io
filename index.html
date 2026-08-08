@@ -3,269 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramcke — Portfólio</title>
+<title>Leo Ramcke — Portfólio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0b1220;
-    --bg-raised: #101a2c;
-    --line: #223049;
-    --text: #e6edf3;
-    --muted: #8797ac;
-    --green: #4ade80;
-    --green-dim: #2f7a52;
-    --amber: #f5a623;
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --ink: #10182b;
+    --muted: #5b6478;
+    --line: #e7e9f0;
+    --primary: #2451e0;
+    --primary-dim: #eef2ff;
+    --amber: #b8730c;
+    --amber-bg: #fdf3e3;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--bg);
-    color:var(--text);
+    color:var(--ink);
     font-family:'Inter', sans-serif;
-    line-height:1.5;
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
   .mono{font-family:'JetBrains Mono', monospace;}
   a{color:inherit;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px;}
 
-  /* subtle grid backdrop */
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity:0.15;
-    pointer-events:none;
-    z-index:0;
+  /* NAV */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 24px; max-width:960px; margin:0 auto;
   }
+  .brand{font-weight:800; font-size:17px; letter-spacing:-0.01em;}
+  .nav-links{display:flex; gap:28px; font-size:14px; font-weight:500; color:var(--muted);}
+  .nav-links a{text-decoration:none;}
+  .nav-links a:hover{color:var(--ink);}
 
-  .wrap{max-width:900px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
-
-  /* HEADER */
-  header{padding:64px 0 28px;}
-  .tag{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--green); border:1px solid var(--green-dim);
-    padding:5px 10px; border-radius:4px;
+  /* HERO */
+  header.hero{
+    padding:56px 0 40px;
+    text-align:left;
   }
-  .tag::before{content:"●"; font-size:8px;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:13px; font-weight:600; color:var(--primary);
+    background:var(--primary-dim);
+    padding:6px 12px; border-radius:100px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--primary);}
   h1{
-    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(34px, 5.2vw, 50px);
     font-weight:800;
-    font-size:clamp(32px, 6vw, 52px);
-    margin-top:18px;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.02em;
+    margin-top:20px;
+    max-width:640px;
   }
-  h1 .prompt{color:var(--muted); font-weight:400;}
-  .sub{
+  .lede{
     color:var(--muted);
-    font-size:16px;
-    margin-top:10px;
-    max-width:520px;
+    font-size:18px;
+    margin-top:14px;
+    max-width:560px;
   }
-  .gh-link{
+  .hero-ctas{margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
     display:inline-flex; align-items:center; gap:8px;
-    margin-top:22px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:14px;
+    font-weight:600; font-size:14.5px;
+    padding:11px 20px; border-radius:9px;
     text-decoration:none;
-    border-bottom:1px solid var(--green-dim);
-    padding-bottom:2px;
-    color:var(--green);
-    transition:opacity .15s;
+    transition:transform .15s ease, box-shadow .15s ease;
   }
-  .gh-link:hover{opacity:0.75;}
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 20px -6px rgba(16,24,43,0.4);}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:#c7cce0;}
 
-  /* TERMINAL */
-  .terminal{
-    margin:36px 0 8px;
-    background:var(--bg-raised);
+  /* SECTION HEADERS */
+  .section{padding:44px 0;}
+  .section-head{margin-bottom:26px;}
+  .section-kicker{
+    font-size:12.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .section-title{
+    font-size:24px; font-weight:800; letter-spacing:-0.01em; margin-top:6px;
+  }
+  .section-desc{color:var(--muted); font-size:15px; margin-top:8px; max-width:600px;}
+
+  /* PRODUCTION GRID (teaser) */
+  .prod-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
+  }
+  .prod-card{
+    background:var(--card);
     border:1px solid var(--line);
-    border-radius:10px;
+    border-radius:14px;
+    padding:22px;
+    position:relative;
     overflow:hidden;
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
   }
-  .terminal-bar{
-    display:flex; align-items:center; gap:7px;
-    padding:11px 14px;
-    background:#0e1626;
-    border-bottom:1px solid var(--line);
+  .prod-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--primary), #8bb0ff);
+    opacity:0.6;
   }
-  .dot{width:10px; height:10px; border-radius:50%;}
-  .dot.r{background:#ff5f57;}
-  .dot.y{background:#febc2e;}
-  .dot.g{background:#28c840;}
-  .terminal-title{
-    margin-left:auto; margin-right:auto;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px; color:var(--muted);
-    transform:translateX(-14px);
+  .status-chip{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:700;
+    background:var(--amber-bg); color:var(--amber);
+    padding:4px 10px; border-radius:100px;
+    margin-bottom:12px;
   }
-  .terminal-body{
-    padding:22px 20px 26px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:14px;
-  }
-  .term-line{margin-bottom:6px; color:var(--muted);}
-  .term-line .p{color:var(--green);}
-  .term-line .path{color:#6aa9ff;}
-  .term-out{color:var(--text); margin:0 0 14px 0; white-space:pre-wrap;}
-  .term-out .dir{color:var(--amber);}
-  .cursor{
-    display:inline-block; width:8px; height:15px;
-    background:var(--green); vertical-align:middle;
-    animation:blink 1s steps(1) infinite;
-    margin-left:2px;
-  }
-  @keyframes blink{50%{opacity:0;}}
+  .status-chip::before{content:"⚡"; font-size:10px;}
+  .prod-name{font-size:16.5px; font-weight:700;}
+  .prod-desc{color:var(--muted); font-size:14px; margin-top:8px;}
 
-  /* PROJECTS */
-  section.projects{padding:52px 0 20px;}
-  .section-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:22px;
-  }
-  .card{
-    display:block;
+  /* TECH PROJECTS */
+  .tech-grid{display:flex; flex-direction:column; gap:12px;}
+  .tech-card{
+    display:flex; align-items:flex-start; gap:16px;
     text-decoration:none;
+    background:var(--card);
     border:1px solid var(--line);
-    border-radius:10px;
-    background:var(--bg-raised);
-    padding:24px 24px 22px;
-    margin-bottom:16px;
-    transition: border-color .18s ease, transform .18s ease;
+    border-radius:12px;
+    padding:20px 22px;
+    transition:border-color .15s ease, transform .15s ease;
   }
-  .card:hover{
-    border-color:var(--green-dim);
-    transform:translateX(4px);
+  .tech-card:hover{border-color:#c7cce0; transform:translateX(3px);}
+  .tech-icon{
+    flex-shrink:0;
+    width:42px; height:42px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--primary-dim); color:var(--primary);
+    font-size:18px; font-weight:800;
   }
-  .card-top{
-    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
-    flex-wrap:wrap;
-  }
-  .card-name{
-    font-family:'JetBrains Mono', monospace;
-    font-weight:700;
-    font-size:19px;
-    color:var(--text);
-  }
-  .card-name .owner{color:var(--muted); font-weight:400;}
-  .arrow{
-    font-family:'JetBrains Mono', monospace;
-    color:var(--green);
-    font-size:14px;
-    white-space:nowrap;
-  }
-  .card-desc{
-    color:var(--muted);
-    font-size:14.5px;
-    margin-top:10px;
-    max-width:620px;
-  }
-  .badges{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;}
-  .badge{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    color:var(--muted);
-    border:1px solid var(--line);
-    padding:3px 8px;
-    border-radius:4px;
+  .tech-body{flex:1; min-width:0;}
+  .tech-top{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .tech-name{font-size:16px; font-weight:700; color:var(--ink);}
+  .tech-link{font-size:13px; font-weight:600; color:var(--primary); white-space:nowrap;}
+  .tech-desc{color:var(--muted); font-size:14px; margin-top:6px; max-width:600px;}
+  .tech-tags{margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;}
+  .tag{
+    font-size:11px; font-weight:600; color:var(--muted);
+    background:#f1f2f7; padding:3px 9px; border-radius:6px;
   }
 
   /* FOOTER */
   footer{
-    padding:60px 0 50px;
+    padding:48px 0 60px;
     border-top:1px solid var(--line);
-    margin-top:40px;
-    color:var(--muted);
-    font-size:13.5px;
-    font-family:'JetBrains Mono', monospace;
+    margin-top:20px;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:14px;
   }
-  footer a{color:var(--green); text-decoration:none; border-bottom:1px solid var(--green-dim);}
+  .footer-text{color:var(--muted); font-size:14px;}
+  .footer-link{
+    font-weight:600; font-size:14px; color:var(--primary); text-decoration:none;
+  }
 
-  @media (max-width:560px){
-    header{padding:44px 0 20px;}
-    .terminal-body{font-size:12.5px;}
-    .card{padding:18px 18px 18px;}
+  @media (max-width:640px){
+    .prod-grid{grid-template-columns:1fr;}
+    nav{padding:18px 20px;}
+    .nav-links{gap:16px; font-size:13px;}
+    header.hero{padding:36px 0 28px;}
+    .tech-card{flex-direction:column;}
   }
 </style>
 </head>
 <body>
 
+<nav>
+  <span class="brand">Leo Ramcke</span>
+  <div class="nav-links">
+    <a href="#producao">Em produção</a>
+    <a href="#tecnicos">Projetos técnicos</a>
+    <a href="https://github.com/leonardoramcke" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</nav>
+
 <div class="wrap">
 
-  <header>
-    <span class="tag">disponível para novos projetos</span>
-    <h1><span class="prompt">~/</span>ramcke</h1>
-    <p class="sub">Desenvolvedor. Construo desde ferramentas offline-first até produtos SaaS ponta a ponta. Abaixo, o que está rodando no repositório agora.</p>
-    <a class="gh-link" href="https://github.com/leonardoramcke" target="_blank" rel="noopener">
-      <span>→</span> github.com/leonardoramcke
-    </a>
+  <header class="hero">
+    <span class="eyebrow">Disponível para novos projetos</span>
+    <h1>Desenvolvedor que constrói produtos do zero até o ar.</h1>
+    <p class="lede">Ferramentas, protótipos e sistemas — do offline-first a plataformas SaaS completas. Abaixo estão os projetos que estou construindo e os que já tenho no código.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#producao">Ver o que estou construindo</a>
+      <a class="btn btn-ghost" href="https://github.com/leonardoramcke" target="_blank" rel="noopener">Ver perfil no GitHub</a>
+    </div>
   </header>
 
-  <div class="terminal">
-    <div class="terminal-bar">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="terminal-title">ramcke — zsh</span>
+  <section class="section" id="producao">
+    <div class="section-head">
+      <p class="section-kicker">Em desenvolvimento ativo</p>
+      <h2 class="section-title">Projetos em produção</h2>
+      <p class="section-desc">Sistemas pensados para rodar de verdade, 24 horas por dia, como os que empresas usam no dia a dia. Estão sendo construídos agora — em breve com link ativo.</p>
     </div>
-    <div class="terminal-body">
-      <p class="term-line"><span class="p">leo@dev</span>:<span class="path">~</span>$ ls ./projetos</p>
-      <p class="term-out"><span class="dir">bitcoin-recovery/</span>  <span class="dir">devcanvas/</span>  <span class="dir">payflow/</span></p>
-      <p class="term-line"><span class="p">leo@dev</span>:<span class="path">~</span>$ cat status.txt<span class="cursor"></span></p>
+
+    <div class="prod-grid">
+      <div class="prod-card">
+        <span class="status-chip">Em construção</span>
+        <div class="prod-name">Simulador de transferência instantânea (Pix)</div>
+        <p class="prod-desc">Sistema que simula transferências bancárias em tempo real, feito para lidar com alto volume de transações sem falhar — o mesmo tipo de exigência de um banco de verdade.</p>
+      </div>
+
+      <div class="prod-card">
+        <span class="status-chip">Em construção</span>
+        <div class="prod-name">Gateway de segurança para APIs</div>
+        <p class="prod-desc">Camada de proteção para sistemas que lidam com dados sensíveis, defendendo contra os ataques mais comuns e mantendo o acesso sob controle.</p>
+      </div>
+
+      <div class="prod-card">
+        <span class="status-chip">Em construção</span>
+        <div class="prod-name">Detecção de fraude em tempo real</div>
+        <p class="prod-desc">Sistema que analisa transações no exato momento em que acontecem, identificando comportamentos suspeitos antes que virem problema.</p>
+      </div>
+
+      <div class="prod-card">
+        <span class="status-chip">Em construção</span>
+        <div class="prod-name">Infraestrutura em nuvem automatizada</div>
+        <p class="prod-desc">Estrutura que permite subir e atualizar sistemas sem interromper o serviço — a mesma base usada por empresas que não podem sair do ar.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <section class="projects" id="projetos">
-    <p class="section-label">// projetos</p>
+  <section class="section" id="tecnicos">
+    <div class="section-head">
+      <p class="section-kicker">Código finalizado</p>
+      <h2 class="section-title">Projetos técnicos</h2>
+      <p class="section-desc">Projetos já concluídos (ou em ajustes finais), com código aberto no GitHub. Clique em qualquer um para ver o repositório completo.</p>
+    </div>
 
-    <a class="card" href="https://github.com/leonardoramcke/bitcoin-recovery" target="_blank" rel="noopener">
-      <div class="card-top">
-        <span class="card-name"><span class="owner">leonardoramcke/</span>bitcoin-recovery</span>
-        <span class="arrow">ver repositório →</span>
-      </div>
-      <p class="card-desc">Ferramenta com interface gráfica para recuperar carteiras Bitcoin a partir de seed phrases BIP39 incompletas. Roda 100% offline.</p>
-      <div class="badges">
-        <span class="badge">GUI</span>
-        <span class="badge">Segurança</span>
-        <span class="badge">Offline-first</span>
-        <span class="badge">BIP39</span>
-      </div>
-    </a>
+    <div class="tech-grid">
+      <a class="tech-card" href="https://github.com/leonardoramcke/pix-simulator" target="_blank" rel="noopener">
+        <div class="tech-icon">₽</div>
+        <div class="tech-body">
+          <div class="tech-top">
+            <span class="tech-name">Pix Simulator</span>
+            <span class="tech-link">Ver código →</span>
+          </div>
+          <p class="tech-desc">Base do simulador de transferências instantâneas — a versão em código-aberto do projeto que está evoluindo para produção.</p>
+          <div class="tech-tags"><span class="tag">Backend</span><span class="tag">Sistemas financeiros</span></div>
+        </div>
+      </a>
 
-    <a class="card" href="https://github.com/leonardoramcke/DevCanvas" target="_blank" rel="noopener">
-      <div class="card-top">
-        <span class="card-name"><span class="owner">leonardoramcke/</span>DevCanvas</span>
-        <span class="arrow">ver repositório →</span>
-      </div>
-      <p class="card-desc">Gerador moderno de CSS com preview em tempo real. Crie efeitos de glassmorphism, sombras e gradientes com facilidade, sem sair do navegador.</p>
-      <div class="badges">
-        <span class="badge">CSS</span>
-        <span class="badge">Dev tool</span>
-        <span class="badge">Preview em tempo real</span>
-      </div>
-    </a>
+      <a class="tech-card" href="https://github.com/leonardoramcke/bitcoin-recovery" target="_blank" rel="noopener">
+        <div class="tech-icon">₿</div>
+        <div class="tech-body">
+          <div class="tech-top">
+            <span class="tech-name">Bitcoin Recovery</span>
+            <span class="tech-link">Ver código →</span>
+          </div>
+          <p class="tech-desc">Ferramenta com interface gráfica para recuperar carteiras Bitcoin a partir de frases de recuperação incompletas. Funciona 100% offline, sem depender da internet.</p>
+          <div class="tech-tags"><span class="tag">Segurança</span><span class="tag">Offline-first</span></div>
+        </div>
+      </a>
 
-    <a class="card" href="https://github.com/leonardoramcke/payflow" target="_blank" rel="noopener">
-      <div class="card-top">
-        <span class="card-name"><span class="owner">leonardoramcke/</span>payflow</span>
-        <span class="arrow">ver repositório →</span>
-      </div>
-      <p class="card-desc">SaaS fictício de gerenciamento de pagamentos, construído como projeto de portfólio para demonstrar arquitetura de produto ponta a ponta.</p>
-      <div class="badges">
-        <span class="badge">SaaS</span>
-        <span class="badge">Fintech</span>
-        <span class="badge">Portfólio</span>
-      </div>
-    </a>
+      <a class="tech-card" href="https://github.com/leonardoramcke/DevCanvas" target="_blank" rel="noopener">
+        <div class="tech-icon">◐</div>
+        <div class="tech-body">
+          <div class="tech-top">
+            <span class="tech-name">DevCanvas</span>
+            <span class="tech-link">Ver código →</span>
+          </div>
+          <p class="tech-desc">Gerador de efeitos visuais para sites (vidro fosco, sombras, gradientes) com visualização instantânea, direto no navegador.</p>
+          <div class="tech-tags"><span class="tag">Ferramenta visual</span><span class="tag">Front-end</span></div>
+        </div>
+      </a>
+
+      <a class="tech-card" href="https://github.com/leonardoramcke/payflow" target="_blank" rel="noopener">
+        <div class="tech-icon">$</div>
+        <div class="tech-body">
+          <div class="tech-top">
+            <span class="tech-name">Payflow</span>
+            <span class="tech-link">Ver código →</span>
+          </div>
+          <p class="tech-desc">Plataforma de gerenciamento de pagamentos construída como estudo de arquitetura de produto completa, do início ao fim.</p>
+          <div class="tech-tags"><span class="tag">SaaS</span><span class="tag">Arquitetura de produto</span></div>
+        </div>
+      </a>
+    </div>
   </section>
 
   <footer>
-    <p>Feito por Leo Ramcke · <a href="https://github.com/leonardoramcke" target="_blank" rel="noopener">github.com/leonardoramcke</a></p>
+    <span class="footer-text">Leo Ramcke</span>
+    <a class="footer-link" href="https://github.com/leonardoramcke" target="_blank" rel="noopener">github.com/leonardoramcke</a>
   </footer>
 
 </div>
